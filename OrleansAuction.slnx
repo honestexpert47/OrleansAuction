@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/PostmanCollection/">
+    <File Path="PostmanCollection/OrleansAuction.postman_collection.json" />
+  </Folder>
   <Project Path="OrleansAuction.Client/OrleansAuction.Client.csproj" />
   <Project Path="OrleansAuction.Shared/OrleansAuction.Shared.csproj" />
   <Project Path="OrleansAuction.Silo/OrleansAuction.Silo.csproj" />
