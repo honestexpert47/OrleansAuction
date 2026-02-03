@@ -1,9 +1,16 @@
 using Azure.Data.Tables;
+using Orleans.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.UseOrleans(siloBuilder =>
 {
+    siloBuilder.Configure<ClusterOptions>(options =>
+    {
+        options.ClusterId = "auction-cluster";
+        options.ServiceId = "AuctionService";
+    });
+
     if (builder.Environment.IsDevelopment())
     {
         siloBuilder.UseLocalhostClustering();

@@ -1,11 +1,18 @@
 using Azure.Data.Tables;
 using Microsoft.AspNetCore.Mvc;
+using Orleans.Configuration;
 using OrleansAuction.Shared;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.UseOrleansClient(client =>
 {
+    client.Configure<ClusterOptions>(options =>
+    {
+        options.ClusterId = "auction-cluster";
+        options.ServiceId = "AuctionService";
+    });
+
     if (builder.Environment.IsDevelopment())
     {
         client.UseLocalhostClustering();
