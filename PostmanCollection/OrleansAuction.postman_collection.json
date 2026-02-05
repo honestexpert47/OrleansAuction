@@ -1,91 +1,138 @@
 {
-  "info": {
-    "_postman_id": "c592b329-3a0a-43b0-ba49-8669d611f58b",
-    "name": "OrleansAuction",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "51821318",
-    "_collection_link": "https://go.postman.co/collection/51821318-c592b329-3a0a-43b0-ba49-8669d611f58b?source=collection_link"
-  },
-  "item": [
-    {
-      "name": "Get Auction",
-      "request": {
-        "auth": {
-          "type": "noauth"
-        },
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "{{host}}/auction/product_1",
-          "host": [
-            "{{host}}"
-          ],
-          "path": [
-            "auction",
-            "product_1"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Bid",
-      "request": {
-        "method": "POST",
-        "header": [],
-        "url": {
-          "raw": "{{host}}/auction/product_1/bid?amount=100&user=dmytro",
-          "host": [
-            "{{host}}"
-          ],
-          "path": [
-            "auction",
-            "product_1",
-            "bid"
-          ],
-          "query": [
-            {
-              "key": "amount",
-              "value": "100"
-            },
-            {
-              "key": "user",
-              "value": "dmytro"
-            }
-          ]
-        }
-      },
-      "response": []
-    }
-  ],
-  "event": [
-    {
-      "listen": "prerequest",
-      "script": {
-        "type": "text/javascript",
-        "packages": {},
-        "requests": {},
-        "exec": [
-          ""
-        ]
-      }
-    },
-    {
-      "listen": "test",
-      "script": {
-        "type": "text/javascript",
-        "packages": {},
-        "requests": {},
-        "exec": [
-          ""
-        ]
-      }
-    }
-  ],
-  "variable": [
-    {
-      "key": "host",
-      "value": ""
-    }
-  ]
+	"info": {
+		"_postman_id": "ee635bce-f6c9-4c8d-8292-88a8bd9d443a",
+		"name": "OrleansAuction",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19943659"
+	},
+	"item": [
+		{
+			"name": "Get Auction",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/auction/product_1",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"auction",
+						"product_1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Bid",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/auction/product_1/bid?amount=100&user=dmytro",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"auction",
+						"product_1",
+						"bid"
+					],
+					"query": [
+						{
+							"key": "amount",
+							"value": "100"
+						},
+						{
+							"key": "user",
+							"value": "dmytro"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Bid Stress",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"let currentId = pm.info.iteration;\r",
+							"\r",
+							"// currentId = Math.floor(Math.random() * 500);\r",
+							"\r",
+							"pm.variables.set(\"auctionId\", \"auction_\" + currentId);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/auction/{{auctionId}}/bid?amount={{$randomInt}}&user=\"DemoUser_{{$randomInt}}\"",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"auction",
+						"{{auctionId}}",
+						"bid"
+					],
+					"query": [
+						{
+							"key": "amount",
+							"value": "{{$randomInt}}"
+						},
+						{
+							"key": "user",
+							"value": "\"DemoUser_{{$randomInt}}\""
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": ""
+		},
+		{
+			"key": "auctionId",
+			"value": "",
+			"type": "string"
+		}
+	]
 }
