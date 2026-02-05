@@ -29,6 +29,7 @@ builder.Host.UseOrleans(siloBuilder =>
 
     siloBuilder.UseDashboard(options =>
     {
+        options.Port = 8081;
         options.HostSelf = true;
         options.CounterUpdateIntervalMs = 1000;
     });
